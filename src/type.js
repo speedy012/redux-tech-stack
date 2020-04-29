@@ -1,0 +1,5 @@
+const CHANGE_DOG_NAME = "CHANGE_DOG_NAME"
+
+export {
+  CHANGE_DOG_NAME
+}
