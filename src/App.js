@@ -1,30 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import './App.css';
-import { changeName } from './action'
+import { changeName, fetchBooks } from './action'
 
 
 
 class App extends React.Component {
 
   componentDidMount() {
-    console.log(this.props.dog)
+    this.props.changeName("bosco")
+    this.props.fetchBooks()
   }
 
 
   render() {
-    return (
-      <div className="App">
-      
-
-      </div>
-    );
+    if(!this.props.loading){
+      return (
+        <div className="App">
+          <h1>{this.props.dog}</h1>
+          {this.props.cat.map(kitties => <h1>{kitties}</h1>)}
+          {this.props.books.map(books => <h1>{books.Title}</h1>)}
+        </div>
+      );
+    }  else {
+      return <div> Loading..</div>
+    }
  }
 }
 
 function msp(state){
-  return { dog: state.dog}
+  return { dog: state.dog, cat: state.cat, books:state.books, loading:state.loading}
 }
 
 
-export default connect(msp, { changeName })(App);
+export default connect(msp, { changeName, fetchBooks })(App);
